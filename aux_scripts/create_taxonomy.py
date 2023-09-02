@@ -34,7 +34,7 @@ def get_taxa(input_gbk):
     for record in GenBank.parse(gbk_handle):
       tax = "\t".join(record.taxonomy)
       acc = record.accession[0]
-      acc2tax = (acc, tax)
+      acc2tax = [acc, tax]
       
   return(acc2tax)
 
@@ -53,6 +53,8 @@ get_taxa_out_dict = dict()
 
 for gbk_file in gbklist:
   get_taxa_out = get_taxa(gbk_file)
+  if get_taxa_out[1] == "":
+    get_taxa_out[1] = "NA"
   get_taxa_out_dict[get_taxa_out[0]] = get_taxa_out[1]
   
 ###############################################################################
