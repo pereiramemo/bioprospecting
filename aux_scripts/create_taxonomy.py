@@ -12,7 +12,7 @@ import os
 ###############################################################################
 
 parser = argparse.ArgumentParser(prog='create_taxonomy.py', \
-                                 description='Estimate BGC coverage')
+                                 description='Create *_taxonomy.tsv tables')
 
 parser.add_argument("--input_tsv", help="Input tsv taxonomy annotation file")
 parser.add_argument("--output_dir", help="Output dir")
