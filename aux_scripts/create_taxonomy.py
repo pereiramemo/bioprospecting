@@ -1,68 +1,51 @@
-#!/usr/bin/python3
+#!/home/epereira/anaconda3/bin/python
 
 ###############################################################################
 ### 1. Set env
 ###############################################################################
 
 import argparse
-import glob
-import pandas as pd
-import csv
-from Bio import GenBank
+import os
 
 ###############################################################################
 ### 2. Parse input data and optional arguments
 ###############################################################################
 
-parser = argparse.ArgumentParser(prog='get_taxa.py', \
-                                 description='Get taxa info from GBK file')
+parser = argparse.ArgumentParser(prog='create_taxonomy.py', \
+                                 description='Estimate BGC coverage')
 
-parser.add_argument("--input_dir", help="Input dir with gbk files")
-parser.add_argument("--output_tsv", help="Output tsv file")
+parser.add_argument("--input_tsv", help="Input tsv taxonomy annotation file")
+parser.add_argument("--output_dir", help="Output dir")
 
 args = parser.parse_args()
-input_dir = args.input_dir
-output_tsv = args.output_tsv
+input_tsv = args.input_tsv
+output_dir = args.output_dir
 
 ###############################################################################
-### 3. Define GBK perser function
+### 3. Create outut dir
 ###############################################################################
 
-def get_taxa(input_gbk):
-
-  with open(input_gbk, "r") as gbk_handle:
-    for record in GenBank.parse(gbk_handle):
-      tax = "\t".join(record.taxonomy)
-      acc = record.accession[0]
-      acc2tax = [acc, tax]
-      
-  return(acc2tax)
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
 
 ###############################################################################
-### 4. Get all input GBK files
+### 4. Parse taxa annotation file
 ###############################################################################
 
-input_files = input_dir + "/*.gbk"
-gbklist = [f for f in glob.glob(input_files)]
-
-###############################################################################
-### 5. Get all taxa info
-###############################################################################
-
-get_taxa_out_dict = dict()
-
-for gbk_file in gbklist:
-  get_taxa_out = get_taxa(gbk_file)
-  if get_taxa_out[1] == "":
-    get_taxa_out[1] = "NA"
-  get_taxa_out_dict[get_taxa_out[0]] = get_taxa_out[1]
+with open(input_tsv, 'r') as input_tsv_handler:
   
-###############################################################################
-### 5. Get all taxa info
-###############################################################################
-
-with open(output_tsv, 'w') as f:
-  [f.write('{0}\t{1}\n'.format(key, value)) for key, value in get_taxa_out_dict.items()]
-
-
+  input_tsv_lines = input_tsv_handler.readlines()
+  
+  for line in input_tsv_lines:
+    line_list = line.strip().split("\t")
+    sample = line_list[0].split("__")[0]
+    seq_id = line_list[0]
+    path = "\t".join(line_list[8].split(";")[1:]) 
+    output_line = "\t".join([seq_id, path])
+    
+    sample = "_".join([sample,"taxonomy.tsv"])
+    output_file = "/".join([output_dir,sample])
+    
+    with open(output_file, 'a') as output_file_handler:
+      print(output_line, file = output_file_handler)
     

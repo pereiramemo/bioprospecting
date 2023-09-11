@@ -17,7 +17,7 @@ parser = argparse.ArgumentParser(prog='get_abund.py', \
 
 parser.add_argument("--input_gbk", help="Input gbk file")
 parser.add_argument("--input_bam", help="Input bam file")
-parser.add_argument("--sample_name", help="Input bam file")
+parser.add_argument("--sample_name", help="Sample name")
 parser.add_argument("--output_tsv", help="Output tsv file")
 
 args = parser.parse_args()
@@ -94,6 +94,7 @@ input_bam_handle.close()
 output = dict()
 for i in gbk_parser_out.keys():
   gbk_parser_out[i]["coverage"] = coverage_out[i]
+  gbk_parser_out[i]["sample"] = sample_name
   output[i] = list(gbk_parser_out[i].values())
 
 ###############################################################################
