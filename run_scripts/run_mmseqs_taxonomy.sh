@@ -54,9 +54,9 @@ docker run \
   --user=$(id -u):$(id -g) \
   epereira/mmseqs:latest easy-taxonomy \
   ${CONTAINER_SRC_DIR}/${INPUT_FILE} \
-  /resources/swiss_prot \ 
+  /resources/siwss_prot \
   ${CONTAINER_DST_DIR}/${OUTPUT_FILE} \
-  /resources/tmp 
+  /tmp/tmp \
   $@
   
 
