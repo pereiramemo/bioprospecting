@@ -102,7 +102,7 @@ for i in gbk_parser_out.keys():
 ###############################################################################
 
 with open(output_tsv, 'w') as f:
-  [f.write('{0}\t\n'.format("\t".join(map(str,value)))) for value in output.values()]
+  [f.write('{0}\n'.format("\t".join(map(str,value)))) for value in output.values()]
 
 
 
