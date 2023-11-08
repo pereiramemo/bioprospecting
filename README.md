@@ -49,13 +49,13 @@ The tools included are containerized, and have to be executed utilizing their co
 ```
 
 The execution folder contains all the modules that compose the bioprospecting pipeline. These are: bgc_annotation, bgc_clustering,  bgc_mapping, and bgc_taxonomy.  
-Each of these modules consist of a folder with the following files:
-The `*_execution.ipynb` NB: which contains the code and documentation necessary to run the analysis.]
-The `src` folder with the following files:
-  `*_Dockerfile` to create the container to run the main tool(s) to be executed in a module.
-  `requirements.txt` a list of all the packages needed to run the `*_execution.ipynb` NB.
-  `utilities.ipynb` the definition of all the functions to be utilized in the `*_execution.ipynb` NB.
-   `run_*.sh` a wrap script to easily execute the containerized tool(s).
+Each of these modules consist of a folder with the following files:  
+The `*_execution.ipynb` NB: which contains the code and documentation necessary to run the analysis.  
+The `src` folder with the following files:  
+ - `*_Dockerfile` to create the container to run the main tool(s) to be executed in a module.  
+ - `requirements.txt` a list of all the packages needed to run the `*_execution.ipynb` NB.  
+ - `utilities.ipynb` the definition of all the functions to be utilized in the `*_execution.ipynb` NB.  
+ -  `run_*.sh` a wrap script to easily execute the containerized tool(s).  
 
 
 
