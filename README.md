@@ -44,7 +44,7 @@ The tools included are containerized, and have to be executed utilizing their co
 │           ├── run_mmseqs_taxonomy.sh
 │           └── utilities.ipynb
 ├── figures
-│   └── Bioprospectig_reads_vs_assembly_dev.png
+│   └── Bioprospectig_pipeline_dev.png
 └── README.md
 ```
 
