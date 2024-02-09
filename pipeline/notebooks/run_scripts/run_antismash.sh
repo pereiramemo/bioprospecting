@@ -3,6 +3,8 @@
 set -o errexit
 set -o nounset
 
+VERSION=7.0.0
+
 function realpath() {
     echo $(readlink -f $1 2>/dev/null || python -c "import sys; import os; print(os.path.realpath(os.path.expanduser(sys.argv[1])))" $1)
 }
@@ -16,10 +18,6 @@ shift
 readonly OUTPUT_DIR=$(realpath $1)
 shift
 
-# handle version
-readonly VERSION=$1
-shift
-
 # Links within the container
 readonly CONTAINER_SRC_DIR=/input
 readonly CONTAINER_DST_DIR=/output
@@ -30,7 +28,6 @@ fi
 
 # echo $INPUT_FILE
 # echo "${OUTPUT_DIR}"
-# echo "${VERSION}"
 
 docker run \
     --volume ${INPUT_DIR}:${CONTAINER_SRC_DIR}:ro \
